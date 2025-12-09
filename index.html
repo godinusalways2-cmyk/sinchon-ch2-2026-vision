@@ -11,14 +11,22 @@
             background-color: #0d6efd; 
             color: white; 
             padding: 30px 0; 
-            cursor: pointer; /* 클릭 유도를 위해 커서 변경 */
+            cursor: pointer; 
+            transition: background-color 0.3s;
+        }
+        .header-section:hover {
+            background-color: #0b5ed7; /* 호버 시 색상 변화 */
+        }
+        .main-content {
+            /* 16:9 비율을 목표로, 가로 길이를 기준으로 비율을 유지 */
+            max-width: 1200px; 
+            margin: 0 auto;
         }
         .photo-grid {
             display: grid;
             /* 8개 열로 나누고, 화면 크기에 따라 자동으로 줄바꿈 */
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
             gap: 5px; 
-            max-width: 1200px;
             margin: 0 auto;
             display: none; /* 초기에는 숨김 */
         }
@@ -38,33 +46,43 @@
             object-fit: cover;
             transition: transform 0.3s ease;
         }
-        .photo-item:hover img {
-            transform: scale(1.05); /* 마우스 오버 시 확대 효과 */
-        }
         .question-box {
             background-color: #ffffff;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 그림자 강화 */
             display: none; /* 사진이 보인 후 나타나도록 초기에는 숨김 */
+        }
+        .btn-custom-cta {
+            background-color: #e74c3c; /* 포인트 색상 */
+            border-color: #e74c3c;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .btn-custom-cta:hover {
+            background-color: #c0392b;
+            border-color: #c0392b;
         }
     </style>
 </head>
 <body>
 
     <header class="header-section text-center" id="main-header">
-        <h1 class="display-4">💡 트렌드 2026 청년 2교구 (클릭하세요)</h1>
-        <p class="lead">2025년 우리의 여정을 감정으로 회고합니다.</p>
+        <h1 class="display-4">🙏 은혜를 기억해 보기</h1>
+        <p class="lead">💡 2025년 우리의 감정 트렌드를 확인하려면 클릭하세요</p>
     </header>
 
-    <div class="container my-5">
+    <div class="container my-5 main-content">
         
         <div class="question-box text-center mb-5" id="question-box">
             <h2 class="text-dark mb-4">질문: 여러분의 2025년은 어떤 감정이었나요?</h2>
             <p class="lead text-secondary">아래 사진들 중 당신의 한 해를 가장 잘 표현하는 이미지를 찾아보세요.</p>
             
-            <a href="session-agenda.html" class="btn btn-primary btn-lg mt-3">
-                세션 시작 및 결과 대시보드 보기
+            <a href="session-agenda.html" class="btn btn-custom-cta btn-lg mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle-fill me-2" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8"/>
+                </svg>
+                다음 단계로 이동 (세션 아젠다 보기)
             </a>
         </div>
 
@@ -73,42 +91,10 @@
             <div class="photo-item"><img src="https://images.unsplash.com/photo-1577977461947-f4705357945c?w=200&h=200&fit=crop&q=80" alt="Focus"></div>
             <div class="photo-item"><img src="https://images.unsplash.com/photo-1520869715561-1277a83d735d?w=200&h=200&fit=crop&q=80" alt="Relief"></div>
             <div class="photo-item"><img src="https://images.unsplash.com/photo-1547806505-1a84f494f1c1?w=200&h=200&fit=crop&q=80" alt="Confusion"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900892-0b70a04705a3?w=200&h=200&fit=crop&q=80" alt="Tiredness"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1517415814571-0941c4314777?w=200&h=200&fit=crop&q=80" alt="Excitement"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547901047-926f7a77f329?w=200&h=200&fit=crop&q=80" alt="Calmness"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547822965-0a56d95323a7?w=200&h=200&fit=crop&q=80" alt="Frustration"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1533085521406-8d57849c25f4?w=200&h=200&fit=crop&q=80" alt="Grinning"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1551079360-1e5f8f3c7e7f?w=200&h=200&fit=crop&q=80" alt="Worry"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1507908927909-661793796d19?w=200&h=200&fit=crop&q=80" alt="Sadness"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900762-b94f06856093?w=200&h=200&fit=crop&q=80" alt="Inspired"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547902409-5a58e453c513?w=200&h=200&fit=crop&q=80" alt="Awe"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547901308-a87f1c1f51b6?w=200&h=200&fit=crop&q=80" alt="Anxiety"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1511216345607-ec30b65673d3?w=200&h=200&fit=crop&q=80" alt="Reflection"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900762-b94f06856093?w=200&h=200&fit=crop&q=80" alt="Hope"></div>
             <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900892-0b70a04705a3?w=200&h=200&fit=crop&q=80" alt="Exhaustion"></div>
             <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900989-5a1202e86976?w=200&h=200&fit=crop&q=80" alt="Determination"></div>
             <div class="photo-item"><img src="https://images.unsplash.com/photo-1547901047-926f7a77f329?w=200&h=200&fit=crop&q=80" alt="Empathy"></div>
             <div class="photo-item"><img src="https://images.unsplash.com/photo-1547902409-5a58e453c513?w=200&h=200&fit=crop&q=80" alt="Love"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547901308-a87f1c1f51b6?w=200&h=200&fit=crop&q=80" alt="Disappointment"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1511216345607-ec30b65673d3?w=200&h=200&fit=crop&q=80" alt="Peace"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900762-b94f06856093?w=200&h=200&fit=crop&q=80" alt="Resilience"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547901047-926f7a77f329?w=200&h=200&fit=crop&q=80" alt="Curiosity"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547822965-0a56d95323a7?w=200&h=200&fit=crop&q=80" alt="Anger"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1533085521406-8d57849c25f4?w=200&h=200&fit=crop&q=80" alt="Joy"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1551079360-1e5f8f3c7e7f?w=200&h=200&fit=crop&q=80" alt="Confusion"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1507908927909-661793796d19?w=200&h=200&fit=crop&q=80" alt="Grief"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900892-0b70a04705a3?w=200&h=200&fit=crop&q=80" alt="Calm"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547902409-5a58e453c513?w=200&h=200&fit=crop&q=80" alt="Thankful"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547901308-a87f1c1f51b6?w=200&h=200&fit=crop&q=80" alt="Struggle"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1511216345607-ec30b65673d3?w=200&h=200&fit=crop&q=80" alt="Acceptance"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900762-b94f06856093?w=200&h=200&fit=crop&q=80" alt="Growth"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547901047-926f7a77f329?w=200&h=200&fit=crop&q=80" alt="Connection"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547822965-0a56d95323a7?w=200&h=200&fit=crop&q=80" alt="Solitude"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1533085521406-8d57849c25f4?w=200&h=200&fit=crop&q=80" alt="Surprise"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1551079360-1e5f8f3c7e7f?w=200&h=200&fit=crop&q=80" alt="Pondering"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1507908927909-661793796d19?w=200&h=200&fit=crop&q=80" alt="Stressed"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900892-0b70a04705a3?w=200&h=200&fit=crop&q=80" alt="Content"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547902409-5a58e453c513?w=200&h=200&fit=crop&q=80" alt="Dreamy"></div>
         </div>
 
     </div>
@@ -124,9 +110,9 @@
             document.getElementById('photo-grid').style.display = 'grid';
             document.getElementById('question-box').style.display = 'block';
             
-            // 헤더의 텍스트도 변경하여 다음 단계를 안내할 수 있습니다.
-            document.querySelector('#main-header h1').innerHTML = '💡 2025 감정 회고';
-            document.querySelector('#main-header p').innerHTML = '사진을 보며 나의 한 해를 돌아보세요.';
+            // 헤더의 텍스트도 변경하여 다음 단계를 안내
+            document.querySelector('#main-header h1').innerHTML = '✅ 2025년 감정 트렌드';
+            document.querySelector('#main-header p').innerHTML = '잠시 묵상 후, 가장 와닿는 사진을 찾아보세요.';
         });
     </script>
 </body>
