@@ -2,62 +2,90 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3부: 비전 선포 및 헌신</title>
+    <title>Vision: Commit</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f5f5f7; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-        .vote-section { padding: 10vh 0; text-align: center; background-color: #fff; }
-        .main-title { font-size: 3rem; font-weight: 600; color: #007aff; margin-bottom: 20px; }
-        .progress-bar-custom { background-color: #34c759; }
-        .progress-bar-container { height: 15px; margin-bottom: 5px; }
-        .final-ritual-box { background-color: #fff0e6; border-radius: 12px; padding: 30px; margin-top: 50px; }
-        .cta-finish { background-color: #ff9500; border-color: #ff9500; border-radius: 980px; padding: 10px 30px; font-weight: 600; transition: background-color 0.3s; }
-        .cta-finish:hover { background-color: #e08400; }
+        :root { --app-bg: #f5f5f7; --primary: #0071e3; }
+        body { background-color: var(--app-bg); font-family: -apple-system, sans-serif; padding: 80px 0; }
+
+        .container { max-width: 700px; }
+        
+        .header { text-align: center; margin-bottom: 60px; }
+        .header h1 { font-size: 3rem; font-weight: 700; }
+        
+        /* Voting Bar Styles */
+        .vote-card { background: white; border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.2s; cursor: default; }
+        .vote-card:hover { transform: scale(1.02); }
+        
+        .idea-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; display: flex; justify-content: space-between; }
+        .progress { height: 16px; border-radius: 10px; background-color: #f2f2f7; overflow: hidden; }
+        .progress-bar { border-radius: 10px; transition: width 2s cubic-bezier(0.22, 1, 0.36, 1); width: 0%; } /* 초기 width 0%로 애니메이션 준비 */
+
+        /* Colors */
+        .bar-blue { background-color: #0071e3; }
+        .bar-purple { background-color: #5856d6; }
+        .bar-orange { background-color: #ff9500; }
+
+        .btn-home { margin-top: 50px; color: #86868b; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; transition: color 0.3s; }
+        .btn-home:hover { color: #1d1d1f; }
     </style>
 </head>
 <body>
 
-    <div class="vote-section">
-        <div class="container">
-            <h1 class="main-title">III. 비전 선포 및 헌신 (25분)</h1>
-            <p class="lead mb-5" style="font-size: 1.5rem;">우리의 아이디어를 2026년 실행 로드맵으로 확정합니다.</p>
+    <div class="container">
+        <div class="header">
+            <h1>우리의 선택, <br><span style="color: var(--primary);">2026년의 첫 걸음</span></h1>
+            <p class="text-muted mt-3">실시간 투표 결과</p>
+        </div>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <h3 class="mb-4">🗳️ 실시간 모바일 투표 현황</h3>
-                    
-                    <p class="float-start fw-bold mb-1">아이디어 A: 소그룹 멘토링 프로그램 도입</p>
-                    <div class="progress progress-bar-container mb-3">
-                        <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <p class="float-end" style="font-size: 0.9rem; font-weight: 500;">45%</p>
-
-                    <p class="float-start fw-bold mb-1">아이디어 B: 월 1회 '교구 자체 콘텐츠 예배' 기획</p>
-                    <div class="progress progress-bar-container mb-3">
-                        <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <p class="float-end" style="font-size: 0.9rem; font-weight: 500;">30%</p>
-                    
-                    <div class="final-ritual-box">
-                        <h3 style="color: #ff9500;">🙏 감사 리츄얼: 2026년 로드맵 선포</h3>
-                        <p class="mb-2">선정된 Top 3 아이디어를 우리의 **첫 행동**으로 선포합니다.</p>
-                        <p>헌신하는 마음으로 함께 찬양하며 마무리합니다.</p>
-                    </div>
-                    
-                </div>
+        <div class="vote-card">
+            <div class="idea-title">
+                <span>💡 소그룹 멘토링 프로그램</span>
+                <span style="color: #0071e3;">45%</span>
             </div>
-            
-            <a href="index.html" class="btn btn-lg cta-finish mt-5">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill me-2" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.736 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-                </svg>
-                세션 종료 및 은혜의 자리로
-            </a>
+            <div class="progress">
+                <div class="progress-bar bar-blue" role="progressbar" data-width="45%"></div>
+            </div>
+        </div>
 
+        <div class="vote-card">
+            <div class="idea-title">
+                <span>🔥 자체 콘텐츠 예배 기획</span>
+                <span style="color: #5856d6;">30%</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bar-purple" role="progressbar" data-width="30%"></div>
+            </div>
+        </div>
+
+        <div class="vote-card">
+            <div class="idea-title">
+                <span>🤝 외부 봉사 정례화</span>
+                <span style="color: #ff9500;">25%</span>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bar-orange" role="progressbar" data-width="25%"></div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="index.html" class="btn-home">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise me-2" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+                </svg>
+                처음으로 돌아가기
+            </a>
         </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 애니메이션: 페이지 로드 후 0.5초 뒤에 프로그레스 바가 차오르도록 설정
+        setTimeout(() => {
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-width');
+            });
+        }, 500);
+    </script>
 </body>
 </html>
