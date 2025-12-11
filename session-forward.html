@@ -5,43 +5,82 @@
     <title>Workshop: Action Canvas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        :root { --app-bg: #f5f5f7; --card-bg: #ffffff; --primary: #0071e3; --text: #1d1d1f; }
-        body { background-color: var(--app-bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding-bottom: 80px; }
+        :root { --app-bg: #f5f5f7; --card-bg: #ffffff; --primary: #0071e3; --text: #1d1d1f; --danger: #ff3b30; }
+        body { background-color: var(--app-bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding-bottom: 100px; }
 
-        .header-section { padding: 60px 0 30px; text-align: center; }
-        .page-title { font-size: 2.5rem; font-weight: 700; color: var(--text); }
-        .page-desc { color: #86868b; font-size: 1.1rem; }
+        .container { max-width: 1000px; }
+
+        /* Header & Target Issue */
+        .header-section { padding: 50px 0 20px; text-align: center; }
+        .target-issue-box { 
+            background: linear-gradient(135deg, #fff 0%, #fff5f5 100%); 
+            border: 1px solid #ffcccc; 
+            border-radius: 16px; 
+            padding: 20px 30px; 
+            display: inline-block; 
+            margin-bottom: 25px; 
+            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.08);
+            max-width: 800px;
+            width: 100%;
+        }
+        .issue-label { font-size: 0.9rem; font-weight: 700; color: var(--danger); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; display: block; }
+        .issue-title { font-size: 1.8rem; font-weight: 800; color: var(--text); margin: 0; }
 
         /* Timer Style */
+        .timer-container { display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px; }
         .timer-badge { 
-            background: #1d1d1f; color: #fff; padding: 10px 25px; border-radius: 980px; 
-            font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums;
-            display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: #1d1d1f; color: #fff; padding: 12px 30px; border-radius: 980px; 
+            font-size: 2rem; font-weight: 700; font-variant-numeric: tabular-nums;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
-        .timer-controls button { background: none; border: none; color: #86868b; font-size: 0.9rem; margin-left: 10px; cursor: pointer; }
-        .timer-controls button:hover { color: #fff; }
+        .btn-control { background: white; border: 1px solid #d2d2d7; width: 50px; height: 50px; border-radius: 50%; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; color: var(--text); }
+        .btn-control:hover { background: #f5f5f7; transform: scale(1.1); }
+        .btn-control.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* Canvas Grid (Bento Style) */
-        .canvas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 30px; }
-        .canvas-card { background: var(--card-bg); border-radius: 24px; padding: 30px; height: 100%; transition: transform 0.3s; border: 1px solid rgba(0,0,0,0.02); box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .canvas-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-        
-        .step-badge { background: #e5f1ff; color: var(--primary); padding: 5px 12px; border-radius: 6px; font-weight: 700; font-size: 0.85rem; display: inline-block; margin-bottom: 15px; }
-        .card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
-        .card-prompt { color: #6e6e73; font-size: 0.95rem; line-height: 1.6; background: #f5f5f7; padding: 15px; border-radius: 12px; margin-top: 15px; }
-        .prompt-q { font-weight: 600; color: #1d1d1f; margin-bottom: 5px; display: block; }
+        /* Example Toggle Button (위치 변경) */
+        .btn-example-toggle {
+            background: none; border: none; color: var(--primary); font-weight: 600; 
+            font-size: 1rem; cursor: pointer; padding: 10px; 
+            display: flex; align-items: center; justify-content: center; gap: 5px; margin: 0 auto;
+        }
+        .btn-example-toggle:hover { text-decoration: underline; }
 
-        /* Example Toggle */
-        .example-section { margin-top: 40px; text-align: center; }
-        .btn-example { background: white; border: 1px solid #d2d2d7; color: var(--text); padding: 10px 20px; border-radius: 980px; font-weight: 500; transition: all 0.2s; }
-        .btn-example:hover { background: #f5f5f7; border-color: #86868b; }
-        
-        .example-content { display: none; background: #fff9f0; border: 1px solid #ffeccf; border-radius: 18px; padding: 30px; margin-top: 20px; text-align: left; }
-        .example-content.show { display: block; animation: slideDown 0.4s ease; }
+        /* Example Box */
+        .example-content { 
+            display: none; 
+            background: #fff; border-left: 4px solid var(--primary); 
+            border-radius: 8px; padding: 20px; margin: 10px auto 30px; 
+            text-align: left; max-width: 800px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .example-content.show { display: block; animation: slideDown 0.3s ease; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .btn-next-step { background: var(--primary); color: white; border-radius: 980px; padding: 15px 40px; font-weight: 600; font-size: 1.1rem; border: none; margin-top: 50px; transition: all 0.3s; }
-        .btn-next-step:hover { background: #0062c4; transform: scale(1.02); color: white; }
+        /* Canvas Grid */
+        .canvas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .canvas-card { background: var(--card-bg); border-radius: 20px; padding: 25px; height: 100%; border: 1px solid rgba(0,0,0,0.04); box-shadow: 0 4px 10px rgba(0,0,0,0.02); transition: transform 0.2s; }
+        .canvas-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+        
+        .step-badge { 
+            display: inline-block; padding: 4px 10px; border-radius: 6px; 
+            font-weight: 700; font-size: 0.8rem; margin-bottom: 15px; 
+            background: #f2f2f7; color: #6e6e73;
+        }
+        /* Step Colors */
+        .step-1 .step-badge { background: #ffebeb; color: var(--danger); }
+        .step-2 .step-badge { background: #e8f2ff; color: var(--primary); }
+        .step-3 .step-badge { background: #e6ffea; color: #34c759; }
+        .step-4 .step-badge { background: #fff4e5; color: #ff9500; }
+
+        .card-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+        .card-desc { font-size: 0.95rem; color: #424245; margin-bottom: 15px; line-height: 1.4; }
+        .prompt-box { background: #f9f9f9; padding: 15px; border-radius: 12px; font-size: 0.9rem; color: #666; }
+
+        .btn-next-step { 
+            background: var(--primary); color: white; border-radius: 980px; 
+            padding: 18px 60px; font-weight: 600; font-size: 1.2rem; border: none; 
+            margin-top: 60px; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.3);
+        }
+        .btn-next-step:hover { background: #0062c4; transform: scale(1.02); }
 
         @media (max-width: 768px) { .canvas-grid { grid-template-columns: 1fr; } }
     </style>
@@ -49,99 +88,103 @@
 <body>
 
     <div class="container">
+        
         <div class="header-section fade-up">
-            <h1 class="page-title">Action Item Canvas</h1>
-            <p class="page-desc mb-4">문제를 기회로 바꾸는 40분의 설계 시간</p>
+            <h5 style="color: #86868b; font-weight: 600; margin-bottom: 20px;">DESIGN WORKSHOP</h5>
             
-            <div class="timer-badge">
-                <span id="timer">40:00</span>
-                <div class="timer-controls">
-                    <button onclick="toggleTimer()" id="timerBtn">▶ Start</button>
-                    <button onclick="resetTimer()">↺</button>
-                </div>
+            <div class="target-issue-box">
+                <span class="issue-label">TARGET ISSUE</span>
+                <h2 class="issue-title" id="target-issue-title">데이터 로딩 중...</h2>
             </div>
         </div>
 
-        <div class="canvas-grid fade-up">
-            
-            <div class="canvas-card">
-                <span class="step-badge">STEP 1. 정의 (10min)</span>
-                <h3 class="card-title">근본 원인 찾기 (Why)</h3>
-                <p>표면에 보이는 현상이 아니라, 그 아래 숨겨진 진짜 이유를 찾아냅니다.</p>
-                <div class="card-prompt">
-                    <span class="prompt-q">🤔 생각의 도구:</span>
-                    "우리가 왜 [Top 1 이슈]를 겪었을까?"라고 3번 물어보세요.<br>
-                    단순히 '바빠서'가 아니라, '무엇이 우리를 바쁘게 했는지' 시스템을 보세요.
-                </div>
+        <div class="fade-up">
+            <div class="timer-container">
+                <button class="btn-control" onclick="resetTimer()" title="초기화">↺</button>
+                <div class="timer-badge" id="timer">25:00</div>
+                <button class="btn-control active" onclick="toggleTimer()" id="timerBtn" title="시작/일시정지">▶</button>
             </div>
 
-            <div class="canvas-card">
-                <span class="step-badge">STEP 2. 목표 (5min)</span>
-                <h3 class="card-title">변화된 모습 상상 (Goal)</h3>
-                <p>2026년 연말, 이 문제가 해결되었다면 우리는 어떤 모습일까요?</p>
-                <div class="card-prompt">
-                    <span class="prompt-q">🎯 SMART 목표:</span>
-                    "막연히 '좋아진다' 대신, '참여율 80%' 혹은 '한 달에 한 번은 전원이 모인다'처럼<br>
-                    <strong>측정 가능한 숫자</strong>나 <strong>상태</strong>로 적어보세요."
-                </div>
-            </div>
-
-            <div class="canvas-card" style="border-left: 4px solid #0071e3;">
-                <span class="step-badge" style="background: #0071e3; color: white;">STEP 3. 실행 (20min) ★핵심</span>
-                <h3 class="card-title">구체적 행동 설계 (Action)</h3>
-                <p>목표를 달성하기 위해 당장 실행할 수 있는 'Next Action' 2가지.</p>
-                <div class="card-prompt">
-                    <span class="prompt-q">⚡ 아이디어 필터:</span>
-                    1. <strong>예산 0원</strong>으로 시작할 수 있는가?<br>
-                    2. 다음 주 <strong>당장 시도</strong>할 수 있는가?<br>
-                    (거창한 행사보다는 매주 반복할 수 있는 '루틴'을 만드세요.)
-                </div>
-            </div>
-
-            <div class="canvas-card">
-                <span class="step-badge">STEP 4. 자원 (5min)</span>
-                <h3 class="card-title">필요 자원 & 담당 (Who)</h3>
-                <p>이 일을 실현하기 위해 무엇이, 누가 필요한가요?</p>
-                <div class="card-prompt">
-                    <span class="prompt-q">📦 체크리스트:</span>
-                    - 필요한 사람 (담당자, 헬퍼)<br>
-                    - 필요한 도구 (공간, 비용, 자료)<br>
-                    - 예상되는 장애물과 해결책
-                </div>
-            </div>
-        </div>
-
-        <div class="example-section fade-up">
-            <button class="btn-example" onclick="toggleExample()">
-                💡 감이 잘 안 오나요? 작성 예시 보기
+            <button class="btn-example-toggle" onclick="toggleExample()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16">
+                    <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6"/>
+                </svg>
+                작성 예시가 필요한가요?
             </button>
-            
+
             <div class="example-content" id="exampleBox">
-                <h5 style="font-weight: 700; margin-bottom: 15px;">📝 예시: "소그룹이 너무 지루해요" 문제 해결</h5>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><strong>1. Why:</strong> 리더 혼자만 말하고, 조원들은 듣기만 하는 '수업' 같은 분위기 때문.</li>
-                    <li class="mb-2"><strong>2. Goal:</strong> 모임 시간의 50%는 조원들이 말하게 한다. (침묵 3초 견디기)</li>
-                    <li class="mb-2"><strong>3. Action:</strong>
-                        <ul>
-                            <li>① '무작위 질문 카드' 도입 (복불복 게임 형식으로 말문 트기)</li>
-                            <li>② 리더는 첫 10분간 경청만 하기 (Rule Setting)</li>
-                        </ul>
-                    </li>
-                    <li class="mb-0"><strong>4. Resource:</strong> 질문 카드 세트 구매(5,000원), 리더 경청 훈련 영상 공유.</li>
-                </ul>
+                <h6 style="font-weight: 700; color: #1d1d1f; margin-bottom: 10px;">📝 [예시] "소그룹이 너무 지루해요" 문제 해결</h6>
+                <div class="row g-3" style="font-size: 0.9rem;">
+                    <div class="col-md-3"><strong>1. 정의:</strong> 리더 혼자만 말하는 수업 같은 분위기</div>
+                    <div class="col-md-3"><strong>2. 목표:</strong> 모임 시간 50%는 조원들이 말하기</div>
+                    <div class="col-md-3"><strong>3. 행동:</strong> '무작위 질문 카드' 도입</div>
+                    <div class="col-md-3"><strong>4. 자원:</strong> 질문 카드 세트(5천원)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-grid fade-up" style="margin-top: 40px;">
+            
+            <div class="canvas-card step-1">
+                <span class="step-badge">STEP 1. 정의 (5min)</span>
+                <h3 class="card-title">Why: 근본 원인</h3>
+                <p class="card-desc">겉으로 보이는 현상 말고, 진짜 이유 한 문장.</p>
+                <div class="prompt-box">
+                    "우리가 왜 [타겟 이슈]를 겪었을까?"<br>
+                    시스템이나 환경에서 원인을 찾아보세요.
+                </div>
+            </div>
+
+            <div class="canvas-card step-2">
+                <span class="step-badge">STEP 2. 목표 (5min)</span>
+                <h3 class="card-title">Goal: 변화된 모습</h3>
+                <p class="card-desc">문제가 해결된 2026년의 상태.</p>
+                <div class="prompt-box">
+                    <strong>측정 가능하게:</strong><br>
+                    "참여율 80%" 혹은 "매달 1회 전원 출석" 등<br>
+                    숫자나 명확한 상태로 적으세요.
+                </div>
+            </div>
+
+            <div class="canvas-card step-3" style="border: 2px solid #34c759;">
+                <span class="step-badge">STEP 3. 행동 (10min) ★집중</span>
+                <h3 class="card-title">Action: 구체적 설계</h3>
+                <p class="card-desc">목표 달성을 위한 Next Action 2가지.</p>
+                <div class="prompt-box">
+                    <strong>아이디어 필터:</strong><br>
+                    1. 돈이 안 드는가? (0원)<br>
+                    2. 다음 주 당장 할 수 있는가?
+                </div>
+            </div>
+
+            <div class="canvas-card step-4">
+                <span class="step-badge">STEP 4. 자원 (5min)</span>
+                <h3 class="card-title">Resource: 필요 자원</h3>
+                <p class="card-desc">실행을 위해 필요한 사람과 도구.</p>
+                <div class="prompt-box">
+                    - 누가 담당할 것인가?<br>
+                    - 무엇이 지원되어야 하는가?
+                </div>
             </div>
         </div>
 
         <div class="text-center">
             <a href="session-vote.html" class="btn-next-step">
-                설계 완료 & 투표하러 가기 →
+                설계 완료! 투표하러 가기 →
             </a>
         </div>
     </div>
 
     <script>
-        // 1. Timer Logic
-        let time = 40 * 60; // 40 minutes in seconds
+        // -----------------------------------------------------------
+        // [★ DATA ZONE] 1부에서 발표한 Top 1 이슈를 여기에 적어주세요.
+        // -----------------------------------------------------------
+        const targetIssue = "관계의 피상성 (깊은 나눔 부족)"; 
+        document.getElementById('target-issue-title').innerText = targetIssue;
+        // -----------------------------------------------------------
+
+        // Timer Logic (25 Minutes)
+        let time = 25 * 60; 
         let timerInterval;
         let isRunning = false;
         const timerDisplay = document.getElementById('timer');
@@ -152,49 +195,49 @@
             const seconds = time % 60;
             timerDisplay.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
             if (time > 0) time--;
-            else pauseTimer();
+            else {
+                pauseTimer();
+                alert("시간이 종료되었습니다! 아이디어를 정리해주세요.");
+            }
         }
 
         function toggleTimer() {
-            if (isRunning) {
-                pauseTimer();
-            } else {
-                startTimer();
-            }
+            if (isRunning) pauseTimer();
+            else startTimer();
         }
 
         function startTimer() {
             isRunning = true;
-            timerBtn.textContent = '❚❚ Pause';
+            timerBtn.innerHTML = "❚❚"; // Pause icon
+            timerBtn.classList.add('active');
             timerInterval = setInterval(updateTimer, 1000);
         }
 
         function pauseTimer() {
             isRunning = false;
-            timerBtn.textContent = '▶ Resume';
+            timerBtn.innerHTML = "▶"; // Play icon
+            timerBtn.classList.remove('active');
             clearInterval(timerInterval);
         }
 
         function resetTimer() {
             pauseTimer();
-            time = 40 * 60;
-            timerBtn.textContent = '▶ Start';
+            time = 25 * 60; // Reset to 25 mins
             updateTimer();
         }
 
-        // 2. Example Toggle Logic
         function toggleExample() {
             const box = document.getElementById('exampleBox');
             box.classList.toggle('show');
         }
 
-        // 3. Simple Fade-up Animation
+        // Fade-up Animation
         document.addEventListener('DOMContentLoaded', () => {
             const fades = document.querySelectorAll('.fade-up');
             fades.forEach((el, index) => {
                 el.style.opacity = 0;
                 el.style.transform = 'translateY(20px)';
-                el.style.transition = `all 0.8s ease ${index * 0.2}s`;
+                el.style.transition = `all 0.8s ease ${index * 0.1}s`;
                 setTimeout(() => {
                     el.style.opacity = 1;
                     el.style.transform = 'translateY(0)';
