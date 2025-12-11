@@ -3,117 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>트렌드 2026 청년 2교구: 2025년 우리의 감정</title>
+    <title>Sinchon Youth 2: Vision 2026 - Experience</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; }
-        .header-section { 
-            background-color: #0d6efd; 
-            color: white; 
-            padding: 30px 0; 
-            cursor: pointer; 
-            transition: background-color 0.3s;
-        }
-        .header-section:hover {
-            background-color: #0b5ed7; /* 호버 시 색상 변화 */
-        }
-        .main-content {
-            /* 16:9 비율을 목표로, 가로 길이를 기준으로 비율을 유지 */
-            max-width: 1200px; 
-            margin: 0 auto;
-        }
-        .photo-grid {
-            display: grid;
-            /* 8개 열로 나누고, 화면 크기에 따라 자동으로 줄바꿈 */
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
-            gap: 5px; 
-            margin: 0 auto;
-            display: none; /* 초기에는 숨김 */
-        }
-        .photo-item {
-            width: 100%;
-            padding-top: 100%; 
-            position: relative;
-            overflow: hidden;
-            border-radius: 5px;
-        }
-        .photo-item img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .question-box {
-            background-color: #ffffff;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* 그림자 강화 */
-            display: none; /* 사진이 보인 후 나타나도록 초기에는 숨김 */
-        }
-        .btn-custom-cta {
-            background-color: #e74c3c; /* 포인트 색상 */
-            border-color: #e74c3c;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .btn-custom-cta:hover {
-            background-color: #c0392b;
-            border-color: #c0392b;
-        }
+        /* Apple Style Minimalism */
+        body { background-color: #f5f5f7; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        .section { padding: 10vh 0; min-height: 80vh; opacity: 0; transition: opacity 1s ease-out, transform 1s ease-out; transform: translateY(50px); }
+        .section.is-visible { opacity: 1; transform: translateY(0); }
+        .hero-section { background-color: white; padding: 20vh 0; text-align: center; }
+        .hero-title { font-size: 3.5rem; font-weight: 600; margin-bottom: 20px; color: #333; }
+        .cta-button { background-color: #007aff; border-color: #007aff; border-radius: 980px; padding: 10px 30px; font-weight: 600; transition: background-color 0.3s; }
+        .cta-button:hover { background-color: #006ddb; }
+        
+        /* 1. 감정 격자 스타일 */
+        .photo-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 8px; max-width: 900px; margin: 0 auto; }
+        .photo-item { padding-top: 100%; position: relative; overflow: hidden; border-radius: 8px; }
+        .photo-item img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+        /* 2. 대시보드 스타일 */
+        .dashboard-issue { background-color: #fff; border-radius: 12px; padding: 30px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
+        .issue-text { color: #d63384; font-size: 1.8rem; font-weight: 600; }
+        
+        /* 3. 아젠다 스타일 */
+        .agenda-card { border: none; border-left: 3px solid #007aff; border-radius: 0; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        /* 4. 투표 스타일 */
+        .vote-item { margin-bottom: 25px; }
+        .progress-bar-custom { background-color: #34c759; } /* Apple Green */
+
     </style>
 </head>
 <body>
 
-    <header class="header-section text-center" id="main-header">
-        <h1 class="display-4">🙏 은혜를 기억해 보기</h1>
-        <p class="lead">💡 2025년 우리의 감정 트렌드를 확인하려면 클릭하세요</p>
-    </header>
-
-    <div class="container my-5 main-content">
-        
-        <div class="question-box text-center mb-5" id="question-box">
-            <h2 class="text-dark mb-4">질문: 여러분의 2025년은 어떤 감정이었나요?</h2>
-            <p class="lead text-secondary">아래 사진들 중 당신의 한 해를 가장 잘 표현하는 이미지를 찾아보세요.</p>
-            
-            <a href="session-agenda.html" class="btn btn-custom-cta btn-lg mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle-fill me-2" viewBox="0 0 16 16">
-                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8"/>
+    <div class="hero-section" id="hero">
+        <div class="container">
+            <h1 class="hero-title">2026 청년 2교구: 비전 설계 경험</h1>
+            <p class="lead mb-4" style="font-size: 1.5rem;">과거의 은혜를 기억하고, 미래의 행동을 구체화합니다.</p>
+            <a href="#section-review" class="btn btn-primary btn-lg cta-button" id="start-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-down-circle-fill me-2" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
                 </svg>
-                다음 단계로 이동 (세션 아젠다 보기)
+                은혜를 기억해 보기
             </a>
         </div>
-
-        <div class="photo-grid" id="photo-grid">
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1542153833-286d5e1cc171?w=200&h=200&fit=crop&q=80" alt="Joyful"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1577977461947-f4705357945c?w=200&h=200&fit=crop&q=80" alt="Focus"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1520869715561-1277a83d735d?w=200&h=200&fit=crop&q=80" alt="Relief"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547806505-1a84f494f1c1?w=200&h=200&fit=crop&q=80" alt="Confusion"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900892-0b70a04705a3?w=200&h=200&fit=crop&q=80" alt="Exhaustion"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547900989-5a1202e86976?w=200&h=200&fit=crop&q=80" alt="Determination"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547901047-926f7a77f329?w=200&h=200&fit=crop&q=80" alt="Empathy"></div>
-            <div class="photo-item"><img src="https://images.unsplash.com/photo-1547902409-5a58e453c513?w=200&h=200&fit=crop&q=80" alt="Love"></div>
-        </div>
-
     </div>
 
-    <footer class="text-center py-4 bg-light mt-5">
-        <p>2026 비전을 함께 만들어갑니다. | 신촌성결교회 청년 2교구</p>
+    <div class="section" id="section-review">
+        <div class="container">
+            <h2 class="text-center mb-5" style="font-weight: 600;">2025년 우리의 감정 트렌드</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="photo-grid">
+                        <div class="photo-item"><img src="images/emotion_01.jpg" alt="감정 1"></div>
+                        <div class="photo-item"><img src="images/emotion_02.jpg" alt="감정 2"></div>
+                        <div class="photo-item"><img src="images/emotion_03.jpg" alt="감정 3"></div>
+                        <div class="photo-item"><img src="images/emotion_04.jpg" alt="감정 4"></div>
+                        <div class="photo-item"><img src="images/emotion_05.jpg" alt="감정 5"></div>
+                        <div class="photo-item"><img src="images/emotion_06.jpg" alt="감정 6"></div>
+                        <div class="photo-item"><img src="images/emotion_07.jpg" alt="감정 7"></div>
+                        <div class="photo-item"><img src="images/emotion_08.jpg" alt="감정 8"></div>
+                        <div class="photo-item"><img src="images/emotion_38.jpg" alt="감정 38"></div>
+                        <div class="photo-item"><img src="images/emotion_39.jpg" alt="감정 39"></div>
+                        <div class="photo-item"><img src="images/emotion_40.jpg" alt="감정 40"></div>
+                    </div>
+                    <div class="text-center mt-5">
+                        <p class="lead"><strong>질문: 당신의 한 해를 가장 잘 표현하는 이미지는 무엇인가요?</strong></p>
+                        <p class="text-muted">잠시 묵상 후, 가장 와닿는 사진을 찾아 소그룹에서 간단히 공유해 보세요.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="section-dashboard">
+        <div class="container">
+            <h2 class="text-center mb-5" style="font-weight: 600;">세션 집중 포인트: Top 1 이슈</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="dashboard-issue">
+                        <p class="text-muted mb-2">2025년 사전 피드백 결과 (45% 응답)</p>
+                        <p class="issue-text">소그룹 활동의 목적 및 흥미 부족</p>
+                        <p class="mt-3">우리가 2026년에 해결하고 성장해야 할 가장 시급한 과제입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="section-agenda">
+        <div class="container">
+            <h2 class="text-center mb-5" style="font-weight: 600;">80분 집중 세션 흐름 (현장 아젠다)</h2>
+            <div class="row">
+                
+                <div class="col-md-4">
+                    <div class="card agenda-card">
+                        <div class="card-body">
+                            <h4 class="card-title" style="color:#007aff;">I. 회고와 데이터 공유 (15분)</h4>
+                            <p class="text-muted">문제 정의 및 공감</p>
+                            <ul>
+                                <li>**리츄얼:** 기억의 촛불 점화</li>
+                                <li>**퍼포먼스:** Top 1 이슈 요약 발표</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card agenda-card">
+                        <div class="card-body">
+                            <h4 class="card-title" style="color:#007aff;">II. 피드포워드 설계 (40분)</h4>
+                            <p class="text-muted">해결책 집중 워크숍</p>
+                            <ul>
+                                <li>**리츄얼:** 묵상을 통한 은혜 고백</li>
+                                <li>**UX:** 액션 아이템 캔버스 토의</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card agenda-card">
+                        <div class="card-body">
+                            <h4 class="card-title" style="color:#007aff;">III. 비전 선포 및 헌신 (25분)</h4>
+                            <p class="text-muted">실행 로드맵 확정</p>
+                            <ul>
+                                <li>**UI:** 실시간 모바일 투표</li>
+                                <li>**리츄얼:** 감사 찬양 및 헌신 선포</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="section-voting">
+        <div class="container">
+            <h2 class="text-center mb-5" style="font-weight: 600;">실시간 투표 현황 (2026년 Next Action 선정)</h2>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="vote-item">
+                        <h5 class="text-muted">아이디어 A: 소그룹 멘토링 프로그램 도입</h5>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="float-end mt-1" style="font-size: 0.9rem; font-weight: 500;">45%</p>
+                    </div>
+                    
+                    <div class="vote-item">
+                        <h5 class="text-muted">아이디어 B: 월 1회 '교구 자체 콘텐츠 예배' 기획</h5>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="float-end mt-1" style="font-size: 0.9rem; font-weight: 500;">30%</p>
+                    </div>
+
+                    <div class="vote-item">
+                        <h5 class="text-muted">아이디어 C: 외부 봉사활동 정례화</h5>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p class="float-end mt-1" style="font-size: 0.9rem; font-weight: 500;">25%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="text-center py-5" style="background-color: #f0f0f0;">
+        <p style="color: #6e6e73;">© 2026 Sinchon Holiness Church Youth 2nd District | Vision built together.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('main-header').addEventListener('click', function() {
-            // 헤더 클릭 시 감정 사진과 질문 박스를 보이게 함
-            document.getElementById('photo-grid').style.display = 'grid';
-            document.getElementById('question-box').style.display = 'block';
-            
-            // 헤더의 텍스트도 변경하여 다음 단계를 안내
-            document.querySelector('#main-header h1').innerHTML = '✅ 2025년 감정 트렌드';
-            document.querySelector('#main-header p').innerHTML = '잠시 묵상 후, 가장 와닿는 사진을 찾아보세요.';
+        // --- 전문가 수준의 스크롤 인터랙션 (Intersection Observer) ---
+        const sections = document.querySelectorAll('.section');
+
+        const observerOptions = {
+            root: null, // 뷰포트
+            rootMargin: '0px',
+            threshold: 0.2 // 섹션의 20%가 보이면 실행
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // 한 번만 실행하려면: observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
         });
+
+        // CTA 버튼 클릭 시 부드러운 스크롤
+        document.getElementById('start-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // 페이지 로드 시 HERO 섹션은 바로 보이게 설정
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.hero-section').classList.add('is-visible');
+        });
+
     </script>
 </body>
 </html>
