@@ -14,7 +14,6 @@
         .header { padding: 80px 0 40px; text-align: center; }
         .header h1 { font-weight: 700; font-size: 3rem; margin-bottom: 10px; }
         
-        /* Bento Grid Style */
         .bento-card {
             background: var(--card-bg);
             border-radius: 24px;
@@ -23,10 +22,17 @@
             height: 100%;
             transition: transform 0.3s ease;
             border: 1px solid rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
         }
         .bento-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         
-        /* Issue Card Styling */
+        /* Clickable Card Style */
+        .clickable-card { cursor: pointer; border: 2px solid transparent; }
+        .clickable-card:hover { border-color: rgba(255, 59, 48, 0.3); }
+        .click-hint { font-size: 0.8rem; color: #86868b; position: absolute; top: 20px; right: 20px; display: none; }
+        .clickable-card:hover .click-hint { display: block; }
+
         .issue-card { background: linear-gradient(135deg, #fff 0%, #fff0f0 100%); border: 1px solid rgba(255, 59, 48, 0.1); }
         .issue-number { font-size: 5rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 10px; letter-spacing: -3px; }
         .issue-label { font-size: 1.8rem; font-weight: 700; color: #1d1d1f; word-break: keep-all; }
@@ -34,6 +40,15 @@
         .agenda-time { display: inline-block; padding: 6px 12px; border-radius: 8px; background: #f2f2f7; color: #86868b; font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; }
         .agenda-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
         
+        /* Data Summary List (Hidden by default) */
+        .data-summary { margin-top: 20px; padding-top: 20px; border-top: 1px dashed #e5e5ea; display: none; }
+        .data-summary.show { display: block; animation: slideDown 0.3s ease; }
+        .data-item { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.95rem; }
+        .data-label { color: #6e6e73; }
+        .data-value { font-weight: 600; color: #1d1d1f; }
+
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
         .btn-next { background: #1d1d1f; color: white; border-radius: 980px; padding: 15px 40px; border: none; font-weight: 600; transition: all 0.3s; }
         .btn-next:hover { background: #333; transform: scale(1.03); color: white; }
     </style>
@@ -42,7 +57,7 @@
 
     <div class="container">
         <div class="header fade-up">
-            <span class="agenda-time" style="background: #e5f1ff; color: #0071e3;">80 Min Session</span>
+            <span class="agenda-time" style="background: #e5f1ff; color: #0071e3;">60 Min Session</span>
             <h1>우리가 마주한 현실</h1>
             <p class="text-muted">설문 데이터가 말해주는 2025년의 가장 큰 아쉬움</p>
         </div>
@@ -51,11 +66,8 @@
             <div class="col-lg-8">
                 <div class="bento-card issue-card text-center">
                     <p class="text-uppercase" style="color: #ff3b30; font-weight: 700; letter-spacing: 1px;">Top 1 Feedback</p>
-                    
                     <div class="issue-number" id="display-percent">0%</div>
-                    
                     <h2 class="issue-label" id="display-title">데이터 로딩 중...</h2>
-                    
                     <p class="mt-3 text-muted" id="display-desc">...</p>
                 </div>
             </div>
@@ -63,20 +75,37 @@
 
         <div class="row g-4 mb-5">
             <div class="col-md-4 fade-up" style="transition-delay: 0.1s;">
-                <div class="bento-card">
+                <div class="bento-card clickable-card" onclick="toggleSummary()">
+                    <span class="click-hint">▼ 클릭해서 데이터 보기</span>
                     <span class="agenda-time">Now: 15min</span>
                     <h3 class="agenda-title" style="color: #ff3b30;">Review</h3>
                     <p>회고와 데이터 공유</p>
                     <hr style="opacity: 0.1;">
-                    <ul class="list-unstyled text-muted small">
+                    <ul class="list-unstyled text-muted small mb-0">
                         <li>• 기억의 촛불 점화</li>
                         <li>• 데이터 요약 발표</li>
                     </ul>
+
+                    <div class="data-summary" id="review-data">
+                        <div class="data-item">
+                            <span class="data-label">🙂 만족도 1위</span>
+                            <span class="data-value">여름 수련회</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label">😢 아쉬움 1위</span>
+                            <span class="data-value">소그룹 나눔</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label">🔥 평균 참여율</span>
+                            <span class="data-value">68%</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="col-md-4 fade-up" style="transition-delay: 0.2s;">
                 <div class="bento-card">
-                    <span class="agenda-time">Next: 40min</span>
+                    <span class="agenda-time">Next: 25min</span>
                     <h3 class="agenda-title" style="color: #34c759;">Design</h3>
                     <p>피드포워드 설계 워크숍</p>
                     <hr style="opacity: 0.1;">
@@ -86,15 +115,16 @@
                     </ul>
                 </div>
             </div>
+
             <div class="col-md-4 fade-up" style="transition-delay: 0.3s;">
                 <div class="bento-card">
-                    <span class="agenda-time">Final: 25min</span>
+                    <span class="agenda-time">Final: 20min</span>
                     <h3 class="agenda-title" style="color: #0071e3;">Vision</h3>
                     <p>비전 선포 및 헌신</p>
                     <hr style="opacity: 0.1;">
                     <ul class="list-unstyled text-muted small">
                         <li>• 실시간 모바일 투표</li>
-                        <li>• 로드맵 선포식</li>
+                        <li>• 2026년 목회계획</li>
                     </ul>
                 </div>
             </div>
@@ -108,26 +138,25 @@
     </div>
 
     <script>
-        // -----------------------------------------------------------
-        // [★ DATA ZONE] 여기를 수정하면 웹사이트에 바로 반영됩니다!
-        // 구글 시트 결과를 보고 아래 값을 바꿔주세요.
-        // -----------------------------------------------------------
+        // [★ DATA ZONE]
         const sheetData = {
-            "percent": 100,               // 예: 1명이 응답했고 그게 1위라면 100% (나중에 45 등으로 변경)
-            "title": "관계의 피상성",      // 구글 시트 Q4에서 1등한 항목의 키워드
-            "desc": "\"깊은 나눔보다는 가벼운 토크 위주라 아쉬웠어요.\"" // 구글 시트 Q5의 대표적인 주관식 답변 1개
+            "percent": 100,               
+            "title": "관계의 피상성",      
+            "desc": "\"깊은 나눔보다는 가벼운 토크 위주라 아쉬웠어요.\"" 
         };
-        // -----------------------------------------------------------
 
-        // 1. 데이터 화면 반영 로직
+        // Review 카드 토글 함수
+        function toggleSummary() {
+            const summary = document.getElementById('review-data');
+            summary.classList.toggle('show');
+        }
+
+        // 데이터 반영 및 애니메이션 로직
         document.getElementById('display-title').innerText = sheetData.title;
         document.getElementById('display-desc').innerText = sheetData.desc;
-
-        // 2. 숫자 카운팅 애니메이션 (0 -> 목표값)
         const counterElement = document.getElementById('display-percent');
         let currentNum = 0;
         const targetNum = sheetData.percent;
-        
         const counter = setInterval(() => {
             if (currentNum >= targetNum) {
                 clearInterval(counter);
@@ -136,9 +165,9 @@
                 currentNum++;
                 counterElement.innerText = currentNum + "%";
             }
-        }, 15); // 속도 조절 (작을수록 빠름)
+        }, 15);
 
-        // 3. 스크롤 등장 효과 (Fade-up)
+        // Fade-up Observer
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible'));
         });
