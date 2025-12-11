@@ -2,130 +2,112 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Vision Design: Session Dashboard</title>
+    <title>Agenda: Insight</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Apple Style Minimalism */
-        body { background-color: #f5f5f7; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-        .section { padding: 8vh 0; }
-        .dashboard-header { background-color: #333; color: white; padding: 30px 0; text-align: center; }
-        .dashboard-issue { background-color: #fff; border-radius: 12px; padding: 30px; text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        .issue-text { color: #ff3b30; /* Apple Red */ font-size: 2rem; font-weight: 600; }
-        .agenda-card { border: none; border-left: 3px solid #007aff; border-radius: 0; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .progress-bar-custom { background-color: #34c759; } /* Apple Green */
-        .cta-back { background-color: #e5e5ea; color: #1d1d1f; border-radius: 980px; font-weight: 600; }
-        .cta-back:hover { background-color: #d1d1d6; }
+        :root { --app-bg: #f5f5f7; --card-bg: #ffffff; --accent: #ff3b30; }
+        body { background-color: var(--app-bg); font-family: -apple-system, sans-serif; padding-bottom: 100px; }
+
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        .header { padding: 80px 0 40px; text-align: center; }
+        .header h1 { font-weight: 700; font-size: 3rem; margin-bottom: 10px; }
+        
+        /* Apple Style Cards (Bento Grid) */
+        .bento-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            height: 100%;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+        .bento-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        
+        .issue-card { background: linear-gradient(135deg, #fff 0%, #fff0f0 100%); border: 1px solid rgba(255, 59, 48, 0.1); }
+        .issue-number { font-size: 5rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 10px; letter-spacing: -3px; }
+        .issue-label { font-size: 1.2rem; font-weight: 600; color: #1d1d1f; }
+        
+        .agenda-time { display: inline-block; padding: 6px 12px; border-radius: 8px; background: #f2f2f7; color: #86868b; font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; }
+        .agenda-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+        
+        .btn-next { background: #1d1d1f; color: white; border-radius: 980px; padding: 15px 40px; border: none; font-weight: 600; transition: all 0.3s; }
+        .btn-next:hover { background: #333; transform: scale(1.03); color: white; }
     </style>
 </head>
 <body>
 
-    <header class="dashboard-header">
-        <div class="container">
-             <h1 class="display-5">⏰ 80분 집중 세션: 비전 설계 대시보드</h1>
-             <p class="lead">2025년 핵심 피드백 & 2026년 실행 로드맵</p>
+    <div class="container">
+        <div class="header fade-up">
+            <span class="agenda-time" style="background: #e5f1ff; color: #0071e3;">80 Min Session</span>
+            <h1>우리가 마주한 현실</h1>
+            <p class="text-muted">데이터가 말해주는 2025년의 가장 큰 아쉬움</p>
         </div>
-    </header>
 
-    <div class="container my-5">
-        
-        <div class="section" id="section-dashboard">
-            <h2 class="text-center mb-5" style="font-weight: 600;">세션 집중 포인트: Top 1 이슈</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="dashboard-issue">
-                        <p class="text-muted mb-2">2025년 사전 피드백 결과 (45% 응답)</p>
-                        <p class="issue-text">소그룹 활동의 목적 및 흥미 부족</p>
-                        <p class="mt-3">이 문제를 해결하기 위해 80분을 집중합니다.</p>
-                    </div>
+        <div class="row justify-content-center mb-5 fade-up">
+            <div class="col-lg-8">
+                <div class="bento-card issue-card text-center">
+                    <p class="text-uppercase" style="color: #ff3b30; font-weight: 700; letter-spacing: 1px;">Top 1 Feedback</p>
+                    <div class="issue-number">45%</div>
+                    <h2 class="issue-label">소그룹 활동의<br>목적 및 흥미 상실</h2>
+                    <p class="mt-3 text-muted">"단순히 모이는 것 이상의 의미를 찾기 어렵습니다."</p>
                 </div>
             </div>
         </div>
 
-        <div class="section" id="section-agenda">
-            <h2 class="text-center mb-5" style="font-weight: 600;">80분 집중 세션 흐름 (현장 아젠다)</h2>
-            <div class="row">
-                
-                <div class="col-md-4">
-                    <div class="card agenda-card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="color:#007aff;">I. 회고와 데이터 공유 (15분)</h4>
-                            <p class="text-muted">문제 정의 및 공감</p>
-                            <ul class="list-unstyled">
-                                <li>**리츄얼:** 기억의 촛불 점화</li>
-                                <li>**퍼포먼스:** Top 1 이슈 요약 발표</li>
-                            </ul>
-                        </div>
-                    </div>
+        <div class="row g-4 mb-5">
+            <div class="col-md-4 fade-up" style="transition-delay: 0.1s;">
+                <div class="bento-card">
+                    <span class="agenda-time">Now: 15min</span>
+                    <h3 class="agenda-title" style="color: #ff3b30;">Review</h3>
+                    <p>회고와 데이터 공유</p>
+                    <hr style="opacity: 0.1;">
+                    <ul class="list-unstyled text-muted small">
+                        <li>• 기억의 촛불 점화</li>
+                        <li>• 데이터 요약 발표</li>
+                    </ul>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="card agenda-card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="color:#007aff;">II. 피드포워드 설계 (40분)</h4>
-                            <p class="text-muted">해결책 집중 워크숍</p>
-                            <ul class="list-unstyled">
-                                <li>**리츄얼:** 묵상을 통한 은혜 고백</li>
-                                <li>**UX:** 액션 아이템 캔버스 토의</li>
-                            </ul>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-md-4 fade-up" style="transition-delay: 0.2s;">
+                <div class="bento-card">
+                    <span class="agenda-time">Next: 40min</span>
+                    <h3 class="agenda-title" style="color: #34c759;">Design</h3>
+                    <p>피드포워드 설계 워크숍</p>
+                    <hr style="opacity: 0.1;">
+                    <ul class="list-unstyled text-muted small">
+                        <li>• 은혜 리츄얼 (묵상)</li>
+                        <li>• 액션 캔버스 토의</li>
+                    </ul>
                 </div>
-                
-                <div class="col-md-4">
-                    <div class="card agenda-card">
-                        <div class="card-body">
-                            <h4 class="card-title" style="color:#007aff;">III. 비전 선포 및 헌신 (25분)</h4>
-                            <p class="text-muted">실행 로드맵 확정</p>
-                            <ul class="list-unstyled">
-                                <li>**UI:** 실시간 모바일 투표</li>
-                                <li>**리츄얼:** 감사 찬양 및 헌신 선포</li>
-                            </ul>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-md-4 fade-up" style="transition-delay: 0.3s;">
+                <div class="bento-card">
+                    <span class="agenda-time">Final: 25min</span>
+                    <h3 class="agenda-title" style="color: #0071e3;">Vision</h3>
+                    <p>비전 선포 및 헌신</p>
+                    <hr style="opacity: 0.1;">
+                    <ul class="list-unstyled text-muted small">
+                        <li>• 실시간 모바일 투표</li>
+                        <li>• 로드맵 선포식</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
-        <div class="section" id="section-voting">
-            <h2 class="text-center mb-5" style="font-weight: 600;">실시간 투표 현황 (2026년 Next Action 선정)</h2>
-            
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="mb-4">
-                        <h5 class="text-muted">아이디어 A: 소그룹 멘토링 프로그램 도입</h5>
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="float-end mt-1" style="font-size: 0.9rem; font-weight: 500;">45%</p>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <h5 class="text-muted">아이디어 B: 월 1회 '교구 자체 콘텐츠 예배' 기획</h5>
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="float-end mt-1" style="font-size: 0.9rem; font-weight: 500;">30%</p>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <h5 class="text-muted">아이디어 C: 외부 봉사활동 정례화</h5>
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <p class="float-end mt-1" style="font-size: 0.9rem; font-weight: 500;">25%</p>
-                    </div>
+        <div class="text-center mt-5 fade-up">
+            <a href="session-forward.html" class="btn btn-next">
+                2부 워크숍 시작하기 →
+            </a>
+        </div>
+    </div>
 
-                    <div class="text-center mt-5">
-                        <a href="index.html" class="btn btn-lg cta-back">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-2" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-                            </svg>
-                            <div class="text-center mt-5">
-                        <a href="session-forward.html" class="btn btn-lg cta-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle-fill me-2" viewBox="0 0 16 16">
-                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8"/>
-                            </svg>
-                            2부 시작: 피드포워드 설계 (40분)
-                        </a>
-                    </div>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible'));
+        });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
