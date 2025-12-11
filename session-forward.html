@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root { --app-bg: #f5f5f7; --card-bg: #ffffff; --primary: #0071e3; --text: #1d1d1f; --danger: #ff3b30; }
-        body { background-color: var(--app-bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding-bottom: 100px; }
+        body { background-color: var(--app-bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding-bottom: 150px; /* 하단 여백 추가 */ }
 
         .container { max-width: 1000px; }
 
@@ -37,7 +37,7 @@
         .btn-control:hover { background: #f5f5f7; transform: scale(1.1); }
         .btn-control.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        /* Example Toggle Button (위치 변경) */
+        /* Example Toggle Button */
         .btn-example-toggle {
             background: none; border: none; color: var(--primary); font-weight: 600; 
             font-size: 1rem; cursor: pointer; padding: 10px; 
@@ -45,14 +45,18 @@
         }
         .btn-example-toggle:hover { text-decoration: underline; }
 
-        /* Example Box */
+        /* Example Box (Updated for multiple examples) */
         .example-content { 
             display: none; 
             background: #fff; border-left: 4px solid var(--primary); 
-            border-radius: 8px; padding: 20px; margin: 10px auto 30px; 
-            text-align: left; max-width: 800px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 8px; padding: 30px; margin: 20px auto 40px; 
+            text-align: left; max-width: 900px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .example-content.show { display: block; animation: slideDown 0.3s ease; }
+        .example-block { margin-bottom: 30px; }
+        .example-block:last-child { margin-bottom: 0; }
+        .example-title { font-weight: 700; color: var(--primary); margin-bottom: 10px; font-size: 1.1rem; }
+        
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Canvas Grid */
@@ -65,7 +69,6 @@
             font-weight: 700; font-size: 0.8rem; margin-bottom: 15px; 
             background: #f2f2f7; color: #6e6e73;
         }
-        /* Step Colors */
         .step-1 .step-badge { background: #ffebeb; color: var(--danger); }
         .step-2 .step-badge { background: #e8f2ff; color: var(--primary); }
         .step-3 .step-badge { background: #e6ffea; color: #34c759; }
@@ -75,10 +78,12 @@
         .card-desc { font-size: 0.95rem; color: #424245; margin-bottom: 15px; line-height: 1.4; }
         .prompt-box { background: #f9f9f9; padding: 15px; border-radius: 12px; font-size: 0.9rem; color: #666; }
 
+        /* Next Button (Updated margin) */
         .btn-next-step { 
             background: var(--primary); color: white; border-radius: 980px; 
             padding: 18px 60px; font-weight: 600; font-size: 1.2rem; border: none; 
-            margin-top: 60px; transition: all 0.3s; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.3);
+            margin-top: 100px; /* 마진을 대폭 늘려 아래로 배치 */
+            transition: all 0.3s; box-shadow: 0 10px 30px rgba(0, 113, 227, 0.3);
         }
         .btn-next-step:hover { background: #0062c4; transform: scale(1.02); }
 
@@ -109,22 +114,45 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16">
                     <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6"/>
                 </svg>
-                작성 예시가 필요한가요?
+                감이 잘 안 오나요? 작성 예시 3가지 보기
             </button>
 
             <div class="example-content" id="exampleBox">
-                <h6 style="font-weight: 700; color: #1d1d1f; margin-bottom: 10px;">📝 [예시] "소그룹이 너무 지루해요" 문제 해결</h6>
-                <div class="row g-3" style="font-size: 0.9rem;">
-                    <div class="col-md-3"><strong>1. 정의:</strong> 리더 혼자만 말하는 수업 같은 분위기</div>
-                    <div class="col-md-3"><strong>2. 목표:</strong> 모임 시간 50%는 조원들이 말하기</div>
-                    <div class="col-md-3"><strong>3. 행동:</strong> '무작위 질문 카드' 도입</div>
-                    <div class="col-md-3"><strong>4. 자원:</strong> 질문 카드 세트(5천원)</div>
+                
+                <div class="example-block">
+                    <h6 class="example-title">📝 [예시 1] 이슈: "소그룹 모임이 너무 지루해요"</h6>
+                    <div class="row g-3" style="font-size: 0.9rem;">
+                        <div class="col-md-3"><strong>1. Why (정의):</strong> 리더 혼자만 말하는 수업 같은 분위기</div>
+                        <div class="col-md-3"><strong>2. Goal (목표):</strong> 모임 시간 50%는 조원들이 말하기 (침묵 견디기)</div>
+                        <div class="col-md-3"><strong>3. Action (행동):</strong> '무작위 질문 카드' 도입하여 복불복 게임으로 진행</div>
+                        <div class="col-md-3"><strong>4. Resource (자원):</strong> 질문 카드 세트(5천원), 간식비</div>
+                    </div>
                 </div>
+                <hr>
+                <div class="example-block">
+                    <h6 class="example-title">📝 [예시 2] 이슈: "나눔이 너무 겉돌아요 (피상적 관계)"</h6>
+                    <div class="row g-3" style="font-size: 0.9rem;">
+                        <div class="col-md-3"><strong>1. Why (정의):</strong> 근황 토크만 하고 깊은 얘기를 꺼낼 안전한 분위기가 아님</div>
+                        <div class="col-md-3"><strong>2. Goal (목표):</strong> 한 학기에 한 번은 모든 조원이 자신의 '기도 제목'을 깊이 나눔</div>
+                        <div class="col-md-3"><strong>3. Action (행동):</strong> 매월 마지막 주를 '딥톡 데이'로 정하고 교재 없이 삶 나눔만 진행</div>
+                        <div class="col-md-3"><strong>4. Resource (자원):</strong> 리더용 딥톡 가이드 질문지, 조용한 카페 공간 확보</div>
+                    </div>
+                </div>
+                <hr>
+                <div class="example-block">
+                    <h6 class="example-title">📝 [예시 3] 이슈: "리더들이 너무 지쳐 보여요 (번아웃)"</h6>
+                    <div class="row g-3" style="font-size: 0.9rem;">
+                        <div class="col-md-3"><strong>1. Why (정의):</strong> 모든 연락, 준비, 심방의 부담을 리더 혼자 짊어짐</div>
+                        <div class="col-md-3"><strong>2. Goal (목표):</strong> 리더의 사역 부담을 현재의 50% 수준으로 감소</div>
+                        <div class="col-md-3"><strong>3. Action (행동):</strong> '1인 1역할제' 도입 (예: 연락 담당, 간식 담당, 서기 담당 등 분배)</div>
+                        <div class="col-md-3"><strong>4. Resource (자원):</strong> 역할 분담표 양식, 조원들의 자발적 참여 독려</div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <div class="canvas-grid fade-up" style="margin-top: 40px;">
-            
             <div class="canvas-card step-1">
                 <span class="step-badge">STEP 1. 정의 (5min)</span>
                 <h3 class="card-title">Why: 근본 원인</h3>
@@ -134,7 +162,6 @@
                     시스템이나 환경에서 원인을 찾아보세요.
                 </div>
             </div>
-
             <div class="canvas-card step-2">
                 <span class="step-badge">STEP 2. 목표 (5min)</span>
                 <h3 class="card-title">Goal: 변화된 모습</h3>
@@ -145,7 +172,6 @@
                     숫자나 명확한 상태로 적으세요.
                 </div>
             </div>
-
             <div class="canvas-card step-3" style="border: 2px solid #34c759;">
                 <span class="step-badge">STEP 3. 행동 (10min) ★집중</span>
                 <h3 class="card-title">Action: 구체적 설계</h3>
@@ -156,7 +182,6 @@
                     2. 다음 주 당장 할 수 있는가?
                 </div>
             </div>
-
             <div class="canvas-card step-4">
                 <span class="step-badge">STEP 4. 자원 (5min)</span>
                 <h3 class="card-title">Resource: 필요 자원</h3>
@@ -208,21 +233,21 @@
 
         function startTimer() {
             isRunning = true;
-            timerBtn.innerHTML = "❚❚"; // Pause icon
+            timerBtn.innerHTML = "❚❚"; 
             timerBtn.classList.add('active');
             timerInterval = setInterval(updateTimer, 1000);
         }
 
         function pauseTimer() {
             isRunning = false;
-            timerBtn.innerHTML = "▶"; // Play icon
+            timerBtn.innerHTML = "▶"; 
             timerBtn.classList.remove('active');
             clearInterval(timerInterval);
         }
 
         function resetTimer() {
             pauseTimer();
-            time = 25 * 60; // Reset to 25 mins
+            time = 25 * 60; 
             updateTimer();
         }
 
