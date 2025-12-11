@@ -2,53 +2,56 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2부: 피드포워드 설계 워크숍</title>
+    <title>Workshop: Design</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f5f5f7; color: #1d1d1f; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-        .forward-section { padding: 15vh 0; text-align: center; min-height: 100vh; display: flex; align-items: center; background-color: #fff; }
-        .main-title { font-size: 3rem; font-weight: 600; color: #007aff; margin-bottom: 20px; }
-        .ritual-box { background-color: #e6f0ff; border-radius: 12px; padding: 30px; margin-bottom: 40px; }
-        .cta-button { background-color: #34c759; border-color: #34c759; border-radius: 980px; padding: 10px 30px; font-weight: 600; transition: background-color 0.3s; }
-        .cta-button:hover { background-color: #2eaf4e; }
+        :root { --app-bg: #f5f5f7; --success: #34c759; }
+        body { background-color: var(--app-bg); font-family: -apple-system, sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+
+        .container { max-width: 800px; }
+        
+        .fade-in { animation: fadeIn 1.5s ease-out forwards; opacity: 0; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+        .ritual-icon { font-size: 4rem; margin-bottom: 20px; display: inline-block; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .title { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; color: #1d1d1f; }
+        .subtitle { font-size: 1.5rem; color: #86868b; margin-bottom: 3rem; font-weight: 400; }
+
+        .guide-box { background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); margin-bottom: 40px; text-align: left; }
+        .guide-step { display: flex; align-items: start; margin-bottom: 20px; }
+        .step-num { background: var(--success); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; flex-shrink: 0; }
+        
+        .btn-start { background-color: var(--success); color: white; border-radius: 980px; padding: 18px 50px; font-size: 1.2rem; font-weight: 600; border: none; transition: all 0.3s; }
+        .btn-start:hover { background-color: #2da84a; transform: scale(1.05); color: white; box-shadow: 0 10px 20px rgba(52, 199, 89, 0.3); }
     </style>
 </head>
 <body>
+    <div class="container fade-in">
+        <div class="ritual-icon">🕯️</div>
+        <h1 class="title">Design the Future</h1>
+        <p class="subtitle">과거의 아쉬움을 미래의 행동으로.</p>
 
-    <div class="forward-section">
-        <div class="container">
-            <h1 class="main-title">II. 피드포워드 설계 워크숍 (40분)</h1>
-            <p class="lead mb-5" style="font-size: 1.5rem;">과거의 문제를 미래의 **실행 아이디어**로 전환할 시간입니다.</p>
-
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="ritual-box">
-                        <h3 style="color: #007aff;">🕯️ 은혜 리츄얼: 문제 해결의 주권</h3>
-                        <p class="mb-2">토의를 시작하기 전, 잠시 눈을 감고 1분간 묵상합니다.</p>
-                        <p>우리의 고민과 노력 위에 **하나님의 은혜**가 함께 하도록 간구합니다.</p>
-                    </div>
-                </div>
+        <div class="guide-box">
+            <h5 class="mb-4" style="font-weight: 700;">Action Item Canvas Guide</h5>
+            <div class="guide-step">
+                <div class="step-num">1</div>
+                <div><strong>Why?</strong> 문제가 발생한 근본 원인을 한 문장으로 정의하세요.</div>
             </div>
-
-            <div class="row justify-content-center mb-5">
-                <div class="col-lg-10">
-                    <h3 class="mb-3">액션 아이템 캔버스 (워크시트)</h3>
-                    <p>소그룹별로 Top 1 이슈를 해결할 **'실행 가능한 아이디어'** 2개를 구체화합니다. 지금 바로 시작하세요!</p>
-                    <p class="text-muted">_리더는 40분 타이머를 설정해 주세요._</p>
-                </div>
+            <div class="guide-step">
+                <div class="step-num">2</div>
+                <div><strong>What?</strong> 2026년에 달성하고 싶은 구체적인 목표를 적으세요.</div>
             </div>
-
-            <a href="session-vote.html" class="btn btn-lg cta-button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle-fill me-2" viewBox="0 0 16 16">
-                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8"/>
-                </svg>
-                3부 시작: 비전 선포 및 투표
-            </a>
-
+            <div class="guide-step">
+                <div class="step-num">3</div>
+                <div><strong>How?</strong> 당장 실행할 수 있는 아이디어 2가지를 제안하세요.</div>
+            </div>
         </div>
+
+        <a href="session-vote.html" class="btn btn-start">
+            투표 및 선포 하러가기
+        </a>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
