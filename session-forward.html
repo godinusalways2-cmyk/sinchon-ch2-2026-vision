@@ -161,4 +161,68 @@
 
         <div class="canvas-grid fade-up" style="margin-top: 40px;">
             <div class="canvas-card step-1">
-                <span class="step-
+                <span class="step-badge">STEP 1. 정의 (5min)</span>
+                <h3 class="card-title">Why: 근본 원인</h3>
+                <p class="card-desc">겉으로 보이는 현상 말고, 진짜 이유 한 문장.</p>
+                <div class="prompt-box">"우리가 왜 이 문제를 겪었을까?"<br>시스템이나 환경에서 원인을 찾으세요.</div>
+            </div>
+            <div class="canvas-card step-2">
+                <span class="step-badge">STEP 2. 목표 (5min)</span>
+                <h3 class="card-title">Goal: 변화된 모습</h3>
+                <p class="card-desc">문제가 해결된 2026년의 상태.</p>
+                <div class="prompt-box"><strong>측정 가능하게:</strong><br>"참여율 80%" 처럼 숫자로 적으세요.</div>
+            </div>
+            <div class="canvas-card step-3" style="border: 2px solid #34c759;">
+                <span class="step-badge">STEP 3. 행동 (10min) ★집중</span>
+                <h3 class="card-title">Action: 구체적 설계</h3>
+                <p class="card-desc">목표 달성을 위한 Next Action 2가지.</p>
+                <div class="prompt-box"><strong>아이디어 필터:</strong><br>1. 돈이 안 드는가? (0원)<br>2. 다음 주 당장 할 수 있는가?</div>
+            </div>
+            <div class="canvas-card step-4">
+                <span class="step-badge">STEP 4. 자원 (5min)</span>
+                <h3 class="card-title">Resource: 필요 자원</h3>
+                <p class="card-desc">실행을 위해 필요한 사람과 도구.</p>
+                <div class="prompt-box">- 누가 담당할 것인가?<br>- 무엇이 지원되어야 하는가?</div>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <a href="session-vote.html" class="btn-next-step">
+                설계 완료! 투표하러 가기 →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const targetIssue = "관계의 피상성 (깊은 나눔 부족)"; 
+        document.getElementById('target-issue-title').innerText = targetIssue;
+
+        let time = 25 * 60; 
+        let timerInterval;
+        let isRunning = false;
+        const timerDisplay = document.getElementById('timer');
+        const timerBtn = document.getElementById('timerBtn');
+
+        function updateTimer() {
+            const minutes = Math.floor(time / 60);
+            const seconds = time % 60;
+            timerDisplay.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            if (time > 0) time--;
+            else { pauseTimer(); alert("시간 종료!"); }
+        }
+
+        function toggleTimer() { isRunning ? pauseTimer() : startTimer(); }
+        function startTimer() { isRunning = true; timerBtn.innerHTML = "❚❚"; timerBtn.classList.add('active'); timerInterval = setInterval(updateTimer, 1000); }
+        function pauseTimer() { isRunning = false; timerBtn.innerHTML = "▶"; timerBtn.classList.remove('active'); clearInterval(timerInterval); }
+        function resetTimer() { pauseTimer(); time = 25 * 60; updateTimer(); }
+        function toggleExample() { document.getElementById('exampleBox').classList.toggle('show'); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-up').forEach((el, index) => {
+                el.style.opacity = 0; el.style.transform = 'translateY(20px)'; el.style.transition = `all 0.8s ease ${index * 0.1}s`;
+                setTimeout(() => { el.style.opacity = 1; el.style.transform = 'translateY(0)'; }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
