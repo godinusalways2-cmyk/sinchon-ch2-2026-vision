@@ -14,7 +14,7 @@
         .header { padding: 80px 0 40px; text-align: center; }
         .header h1 { font-weight: 700; font-size: 3rem; margin-bottom: 10px; }
         
-        /* Apple Style Cards (Bento Grid) */
+        /* Bento Grid Style */
         .bento-card {
             background: var(--card-bg);
             border-radius: 24px;
@@ -26,9 +26,10 @@
         }
         .bento-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
         
+        /* Issue Card Styling */
         .issue-card { background: linear-gradient(135deg, #fff 0%, #fff0f0 100%); border: 1px solid rgba(255, 59, 48, 0.1); }
         .issue-number { font-size: 5rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 10px; letter-spacing: -3px; }
-        .issue-label { font-size: 1.2rem; font-weight: 600; color: #1d1d1f; }
+        .issue-label { font-size: 1.8rem; font-weight: 700; color: #1d1d1f; word-break: keep-all; }
         
         .agenda-time { display: inline-block; padding: 6px 12px; border-radius: 8px; background: #f2f2f7; color: #86868b; font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; }
         .agenda-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
@@ -43,16 +44,19 @@
         <div class="header fade-up">
             <span class="agenda-time" style="background: #e5f1ff; color: #0071e3;">80 Min Session</span>
             <h1>우리가 마주한 현실</h1>
-            <p class="text-muted">데이터가 말해주는 2025년의 가장 큰 아쉬움</p>
+            <p class="text-muted">설문 데이터가 말해주는 2025년의 가장 큰 아쉬움</p>
         </div>
 
         <div class="row justify-content-center mb-5 fade-up">
             <div class="col-lg-8">
                 <div class="bento-card issue-card text-center">
                     <p class="text-uppercase" style="color: #ff3b30; font-weight: 700; letter-spacing: 1px;">Top 1 Feedback</p>
-                    <div class="issue-number">45%</div>
-                    <h2 class="issue-label">소그룹 활동의<br>목적 및 흥미 상실</h2>
-                    <p class="mt-3 text-muted">"단순히 모이는 것 이상의 의미를 찾기 어렵습니다."</p>
+                    
+                    <div class="issue-number" id="display-percent">0%</div>
+                    
+                    <h2 class="issue-label" id="display-title">데이터 로딩 중...</h2>
+                    
+                    <p class="mt-3 text-muted" id="display-desc">...</p>
                 </div>
             </div>
         </div>
@@ -104,6 +108,37 @@
     </div>
 
     <script>
+        // -----------------------------------------------------------
+        // [★ DATA ZONE] 여기를 수정하면 웹사이트에 바로 반영됩니다!
+        // 구글 시트 결과를 보고 아래 값을 바꿔주세요.
+        // -----------------------------------------------------------
+        const sheetData = {
+            "percent": 100,               // 예: 1명이 응답했고 그게 1위라면 100% (나중에 45 등으로 변경)
+            "title": "관계의 피상성",      // 구글 시트 Q4에서 1등한 항목의 키워드
+            "desc": "\"깊은 나눔보다는 가벼운 토크 위주라 아쉬웠어요.\"" // 구글 시트 Q5의 대표적인 주관식 답변 1개
+        };
+        // -----------------------------------------------------------
+
+        // 1. 데이터 화면 반영 로직
+        document.getElementById('display-title').innerText = sheetData.title;
+        document.getElementById('display-desc').innerText = sheetData.desc;
+
+        // 2. 숫자 카운팅 애니메이션 (0 -> 목표값)
+        const counterElement = document.getElementById('display-percent');
+        let currentNum = 0;
+        const targetNum = sheetData.percent;
+        
+        const counter = setInterval(() => {
+            if (currentNum >= targetNum) {
+                clearInterval(counter);
+                counterElement.innerText = targetNum + "%";
+            } else {
+                currentNum++;
+                counterElement.innerText = currentNum + "%";
+            }
+        }, 15); // 속도 조절 (작을수록 빠름)
+
+        // 3. 스크롤 등장 효과 (Fade-up)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible'));
         });
