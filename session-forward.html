@@ -7,9 +7,8 @@
     <style>
         :root { --app-bg: #f5f5f7; --card-bg: #ffffff; --primary: #0071e3; --text: #1d1d1f; --danger: #ff3b30; }
         
-        /* [수정] 바디 하단 여백을 충분히 주어 스크롤이 가능하게 함 */
-        body { background-color: var(--app-bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding-bottom: 200px; }
-
+        /* [중요] 바디 하단 여백 제거 (Spacer로 대체) */
+        body { background-color: var(--app-bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding-bottom: 0; }
         .container { max-width: 1000px; }
 
         /* Header & Target Issue */
@@ -80,15 +79,15 @@
         .card-desc { font-size: 0.95rem; color: #424245; margin-bottom: 15px; line-height: 1.4; }
         .prompt-box { background: #f9f9f9; padding: 15px; border-radius: 12px; font-size: 0.9rem; color: #666; }
 
-        /* [수정] 버튼 컨테이너: 버튼 주변 여백을 확실하게 확보 */
+        /* [핵심] 빈 공간(Spacer) 추가: 버튼이 절대 겹치지 않게 함 */
+        .spacer { height: 100px; width: 100%; clear: both; }
+
+        /* Next Button Container */
         .btn-container {
             text-align: center;
-            margin-top: 80px;      /* 위쪽 요소와 거리 벌림 */
-            padding-bottom: 50px;  /* 페이지 끝과 거리 벌림 */
-            clear: both;
+            margin-bottom: 100px; /* 바닥에서 띄움 */
         }
 
-        /* Next Button */
         .btn-next-step { 
             background: var(--primary); color: white; border-radius: 980px; 
             padding: 18px 60px; font-weight: 600; font-size: 1.2rem; border: none; 
@@ -106,9 +105,10 @@
         
         <div class="header-section fade-up">
             <h5 style="color: #86868b; font-weight: 600; margin-bottom: 20px;">DESIGN WORKSHOP</h5>
+            
             <div class="target-issue-box">
                 <span class="issue-label">TARGET ISSUE</span>
-                <h2 class="issue-title" id="target-issue-title">데이터 로딩 중...</h2>
+                <h2 class="issue-title" id="target-issue-title">...</h2>
             </div>
         </div>
 
@@ -121,7 +121,7 @@
 
             <button class="btn-example-toggle" onclick="toggleExample()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb-fill" viewBox="0 0 16 16">
-                    <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6"/>
+                    <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6"/>
                 </svg>
                 감이 잘 안 오나요? 작성 예시 3가지 보기
             </button>
@@ -164,27 +164,42 @@
                 <span class="step-badge">STEP 1. 정의 (5min)</span>
                 <h3 class="card-title">Why: 근본 원인</h3>
                 <p class="card-desc">겉으로 보이는 현상 말고, 진짜 이유 한 문장.</p>
-                <div class="prompt-box">"우리가 왜 이 문제를 겪었을까?"<br>시스템이나 환경에서 원인을 찾으세요.</div>
+                <div class="prompt-box">
+                    "우리가 왜 [타겟 이슈]를 겪었을까?"<br>
+                    시스템이나 환경에서 원인을 찾아보세요.
+                </div>
             </div>
             <div class="canvas-card step-2">
                 <span class="step-badge">STEP 2. 목표 (5min)</span>
                 <h3 class="card-title">Goal: 변화된 모습</h3>
                 <p class="card-desc">문제가 해결된 2026년의 상태.</p>
-                <div class="prompt-box"><strong>측정 가능하게:</strong><br>"참여율 80%" 처럼 숫자로 적으세요.</div>
+                <div class="prompt-box">
+                    <strong>측정 가능하게:</strong><br>
+                    "참여율 80%" 처럼 숫자로 적으세요.
+                </div>
             </div>
             <div class="canvas-card step-3" style="border: 2px solid #34c759;">
                 <span class="step-badge">STEP 3. 행동 (10min) ★집중</span>
                 <h3 class="card-title">Action: 구체적 설계</h3>
                 <p class="card-desc">목표 달성을 위한 Next Action 2가지.</p>
-                <div class="prompt-box"><strong>아이디어 필터:</strong><br>1. 돈이 안 드는가? (0원)<br>2. 다음 주 당장 할 수 있는가?</div>
+                <div class="prompt-box">
+                    <strong>아이디어 필터:</strong><br>
+                    1. 돈이 안 드는가? (0원)<br>
+                    2. 다음 주 당장 할 수 있는가?
+                </div>
             </div>
             <div class="canvas-card step-4">
                 <span class="step-badge">STEP 4. 자원 (5min)</span>
                 <h3 class="card-title">Resource: 필요 자원</h3>
                 <p class="card-desc">실행을 위해 필요한 사람과 도구.</p>
-                <div class="prompt-box">- 누가 담당할 것인가?<br>- 무엇이 지원되어야 하는가?</div>
+                <div class="prompt-box">
+                    - 누가 담당할 것인가?<br>
+                    - 무엇이 지원되어야 하는가?
+                </div>
             </div>
         </div>
+
+        <div class="spacer"></div>
 
         <div class="btn-container">
             <a href="session-vote.html" class="btn-next-step">
@@ -194,9 +209,14 @@
     </div>
 
     <script>
+        // -----------------------------------------------------------
+        // [★ DATA ZONE] 1부에서 발표한 Top 1 이슈를 여기에 적어주세요.
+        // -----------------------------------------------------------
         const targetIssue = "관계의 피상성 (깊은 나눔 부족)"; 
         document.getElementById('target-issue-title').innerText = targetIssue;
+        // -----------------------------------------------------------
 
+        // Timer Logic (25 Minutes)
         let time = 25 * 60; 
         let timerInterval;
         let isRunning = false;
@@ -208,19 +228,53 @@
             const seconds = time % 60;
             timerDisplay.textContent = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
             if (time > 0) time--;
-            else { pauseTimer(); alert("시간 종료!"); }
+            else {
+                pauseTimer();
+                alert("시간이 종료되었습니다! 아이디어를 정리해주세요.");
+            }
         }
 
-        function toggleTimer() { isRunning ? pauseTimer() : startTimer(); }
-        function startTimer() { isRunning = true; timerBtn.innerHTML = "❚❚"; timerBtn.classList.add('active'); timerInterval = setInterval(updateTimer, 1000); }
-        function pauseTimer() { isRunning = false; timerBtn.innerHTML = "▶"; timerBtn.classList.remove('active'); clearInterval(timerInterval); }
-        function resetTimer() { pauseTimer(); time = 25 * 60; updateTimer(); }
-        function toggleExample() { document.getElementById('exampleBox').classList.toggle('show'); }
+        function toggleTimer() {
+            if (isRunning) pauseTimer();
+            else startTimer();
+        }
 
+        function startTimer() {
+            isRunning = true;
+            timerBtn.innerHTML = "❚❚"; 
+            timerBtn.classList.add('active');
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function pauseTimer() {
+            isRunning = false;
+            timerBtn.innerHTML = "▶"; 
+            timerBtn.classList.remove('active');
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            time = 25 * 60; 
+            updateTimer();
+        }
+
+        function toggleExample() {
+            const box = document.getElementById('exampleBox');
+            box.classList.toggle('show');
+        }
+
+        // Fade-up Animation
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.fade-up').forEach((el, index) => {
-                el.style.opacity = 0; el.style.transform = 'translateY(20px)'; el.style.transition = `all 0.8s ease ${index * 0.1}s`;
-                setTimeout(() => { el.style.opacity = 1; el.style.transform = 'translateY(0)'; }, 100);
+            const fades = document.querySelectorAll('.fade-up');
+            fades.forEach((el, index) => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = `all 0.8s ease ${index * 0.1}s`;
+                setTimeout(() => {
+                    el.style.opacity = 1;
+                    el.style.transform = 'translateY(0)';
+                }, 100);
             });
         });
     </script>
